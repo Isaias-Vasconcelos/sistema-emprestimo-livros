@@ -5,11 +5,15 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GerenciamentoEmprestimoLivros.Core", "GerenciamentoEmprestimoLivros.Core", "{5DA2A341-DB94-4AB1-8B4D-304C3621BE96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentoEmprestimoLivros.Core", "GerenciamentoEmprestimoLivros.Core\GerenciamentoEmprestimoLivros.Core.csproj", "{45AF3C05-461A-45E0-9A5E-154729D76393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciamentoEmprestimoLivros.Core", "GerenciamentoEmprestimoLivros.Core\GerenciamentoEmprestimoLivros.Core.csproj", "{45AF3C05-461A-45E0-9A5E-154729D76393}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GerenciamentoEmprestimoLivros.Infra", "GerenciamentoEmprestimoLivros.Infra", "{8D1DCC66-0662-46C6-8097-11B814AC4836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentoEmprestimoLivros.Infra", "GerenciamentoEmprestimoLivros.Infra\GerenciamentoEmprestimoLivros.Infra.csproj", "{D6ED2112-8D27-4E2C-8616-C5D82534EF0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciamentoEmprestimoLivros.Infra", "GerenciamentoEmprestimoLivros.Infra\GerenciamentoEmprestimoLivros.Infra.csproj", "{D6ED2112-8D27-4E2C-8616-C5D82534EF0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GerenciamentoEmprestimoLivros.Application", "GerenciamentoEmprestimoLivros.Application", "{AEFFC09A-9C49-4856-9DD0-C449A9FC855A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentoEmprestimoLivros.Application", "GerenciamentoEmprestimoLivros.Application\GerenciamentoEmprestimoLivros.Application.csproj", "{45FA747A-64EC-4934-8F69-6F2CC6AFD0BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{D6ED2112-8D27-4E2C-8616-C5D82534EF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6ED2112-8D27-4E2C-8616-C5D82534EF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6ED2112-8D27-4E2C-8616-C5D82534EF0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45FA747A-64EC-4934-8F69-6F2CC6AFD0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45FA747A-64EC-4934-8F69-6F2CC6AFD0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45FA747A-64EC-4934-8F69-6F2CC6AFD0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45FA747A-64EC-4934-8F69-6F2CC6AFD0BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{45AF3C05-461A-45E0-9A5E-154729D76393} = {5DA2A341-DB94-4AB1-8B4D-304C3621BE96}
 		{D6ED2112-8D27-4E2C-8616-C5D82534EF0F} = {8D1DCC66-0662-46C6-8097-11B814AC4836}
+		{45FA747A-64EC-4934-8F69-6F2CC6AFD0BC} = {AEFFC09A-9C49-4856-9DD0-C449A9FC855A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {262F98B0-BCE9-4E35-B859-BCD61342407F}

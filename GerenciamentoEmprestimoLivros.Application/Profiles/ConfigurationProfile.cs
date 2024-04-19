@@ -10,7 +10,8 @@ namespace GerenciamentoEmprestimoLivros.Application.Profiles
         public ConfigurationProfile()
         {
             CreateMap<AdicionarUsuarioInputModel, Usuario>();
-            CreateMap<Usuario, UsuarioViewModel>(); 
+            CreateMap<Usuario, UsuarioViewModel>();
+            CreateMap<AtualizarUsuarioInputModel, Usuario>();
         }
     }
 }
