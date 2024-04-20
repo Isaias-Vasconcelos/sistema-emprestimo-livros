@@ -9,5 +9,6 @@ namespace GerenciamentoEmprestimoLivros.Core.Repositories
         Task<ResponseOperation<Usuario>> GetById(int id);
         Task<ResponseOperation<Usuario>> Save(Usuario usuario);
         Task<ResponseOperation<Usuario>> Update(Usuario usuario);
+        Task<ResponseOperation<Usuario>> Delete(int id);
     }
 }

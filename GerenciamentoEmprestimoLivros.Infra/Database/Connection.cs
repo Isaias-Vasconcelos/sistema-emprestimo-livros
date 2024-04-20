@@ -8,7 +8,7 @@ namespace GerenciamentoEmprestimoLivros.Infra.Database
 {
     public static class Connection
     {
-        public static IDbConnection Database { get; private set; } = new MySqlConnection("Server=localhost;Port=3306;Uid=root;Pwd=jjkeys61;");
+        public static IDbConnection Database { get; private set; } = new MySqlConnection("Server=localhost;Port=3306;Database=sistema_emprestimo;Uid=root;Pwd=jjkeys61;");
 
         public static void CreateTables()
         {

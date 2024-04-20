@@ -10,5 +10,6 @@ namespace GerenciamentoEmprestimoLivros.Application.Services
         Task<ResponseService<UsuarioViewModel>> BuscarUsuarioPorId(int id);
         Task<ResponseService<UsuarioViewModel>> CriarUsuario(AdicionarUsuarioInputModel input);
         Task<ResponseService<UsuarioViewModel>> AtualizarUsuario(AtualizarUsuarioInputModel input);
+        Task<ResponseService<UsuarioViewModel>> ExcluirUsuario(int id);
     }
 }

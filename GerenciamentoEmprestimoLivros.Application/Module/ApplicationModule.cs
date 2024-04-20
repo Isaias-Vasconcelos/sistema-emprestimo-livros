@@ -2,6 +2,7 @@
 using GerenciamentoEmprestimoLivros.Application.Services;
 using GerenciamentoEmprestimoLivros.Application.Services.Implementations;
 using GerenciamentoEmprestimoLivros.Core.Repositories;
+using GerenciamentoEmprestimoLivros.Infra.Database;
 using GerenciamentoEmprestimoLivros.Infra.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,16 +28,18 @@ namespace GerenciamentoEmprestimoLivros.Application.Module
 
         static IServiceCollection Repositories(this IServiceCollection services)
         {
-            services.AddScoped<IUsuarioRepository,UsuarioRepository>();
+            //Create tables
+            Connection.CreateTables();
+
+            // Add Repositories
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             return services;
         }
 
-        static IServiceCollection Profiles (this IServiceCollection services)
+        static IServiceCollection Profiles(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(ConfigurationProfile));
             return services;
         }
-
-
     }
 }

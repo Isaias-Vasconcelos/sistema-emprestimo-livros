@@ -30,13 +30,12 @@ namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
                     ManyResult = usuariosViewModel.ToList()
                 };
             }
-            else
+
+            return new ResponseService<UsuarioViewModel>
             {
-                return new ResponseService<UsuarioViewModel>
-                {
-                    Exception = usuariosRepositoryResponse.Exception
-                };
-            }
+                Exception = usuariosRepositoryResponse.Exception
+            };
+
         }
         public async Task<ResponseService<UsuarioViewModel>> BuscarUsuarioPorId(int id)
         {
@@ -52,13 +51,12 @@ namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
                     SingleResult = usuarioViewModel
                 };
             }
-            else
+
+            return new ResponseService<UsuarioViewModel>
             {
-                return new ResponseService<UsuarioViewModel>
-                {
-                    Exception = usuarioRepositoryResponse.Exception
-                };
-            }
+                Exception = usuarioRepositoryResponse.Exception
+            };
+
         }
         public async Task<ResponseService<UsuarioViewModel>> CriarUsuario(AdicionarUsuarioInputModel input)
         {
@@ -66,20 +64,16 @@ namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
 
             var usuarioCreateResponse = await _usuarioRepository.Save(usuarioEntity);
 
-            if (usuarioCreateResponse.IsSuccess)
-            {
-                return new ResponseService<UsuarioViewModel>
+            return usuarioCreateResponse.IsSuccess ?
+                new ResponseService<UsuarioViewModel>
                 {
                     Success = "Usuário criado com sucesso!"
-                };
-            }
-            else
-            {
-                return new ResponseService<UsuarioViewModel>
+                }
+                : new ResponseService<UsuarioViewModel>
                 {
                     Exception = usuarioCreateResponse.Exception
                 };
-            }
+
         }
         public async Task<ResponseService<UsuarioViewModel>> AtualizarUsuario(AtualizarUsuarioInputModel input)
         {
@@ -87,21 +81,29 @@ namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
 
             var usuarioUpdateResponse = await _usuarioRepository.Update(usuarioEntity);
 
-            if (usuarioUpdateResponse.IsSuccess)
-            {
-                return new ResponseService<UsuarioViewModel>
+            return usuarioUpdateResponse.IsSuccess
+                ? new ResponseService<UsuarioViewModel>
                 {
                     Success = "Usuário atualizado com sucesso"
-                };
-            }
-            else
-            {
-                return new ResponseService<UsuarioViewModel>
+                }
+                : new ResponseService<UsuarioViewModel>
                 {
                     Exception = usuarioUpdateResponse.Exception
                 };
+        }
+        public async Task<ResponseService<UsuarioViewModel>> ExcluirUsuario(int id)
+        {
+            var usuarioExcluidoResponse = await _usuarioRepository.Delete(id);
 
-            }
+            return usuarioExcluidoResponse.IsSuccess
+                ? new ResponseService<UsuarioViewModel>
+                {
+                    Success = "Usuário excluido com sucesso"
+                }
+                : new ResponseService<UsuarioViewModel>
+                {
+                    Exception = usuarioExcluidoResponse.Exception
+                };
         }
     }
 }

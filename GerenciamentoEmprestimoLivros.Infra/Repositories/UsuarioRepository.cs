@@ -51,10 +51,11 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
                 responseOperation = new()
                 {
                     IsSuccess = true,
-                    SingleResult = usuario ?? new Usuario(0,"not found","not found")
+                    SingleResult = usuario ?? new Usuario(0, "not found", "not found")
                 };
 
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 responseOperation = new()
                 {
@@ -74,15 +75,17 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
 
                 var parametros = new { usuario.Nome, usuario.Email, usuario.Senha };
 
-                await _database.ExecuteAsync(sql,parametros);
+                await _database.ExecuteAsync(sql, parametros);
 
                 responseOperation = new()
                 {
                     IsSuccess = true,
                 };
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
-                responseOperation = new() {
+                responseOperation = new()
+                {
                     IsSuccess = false,
                     Exception = ex.Message
                 };
@@ -99,9 +102,35 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
 
                 var parametros = new { usuario.Id, usuario.Nome, usuario.Email, usuario.Senha };
 
-                await _database.ExecuteAsync(sql,parametros);
+                await _database.ExecuteAsync(sql, parametros);
 
-                responseOperation = new() {
+                responseOperation = new()
+                {
+                    IsSuccess = true,
+                };
+            }
+            catch (Exception ex)
+            {
+                responseOperation = new()
+                {
+                    IsSuccess = false,
+                    Exception = ex.Message
+                };
+            }
+            return responseOperation;
+        }
+
+        public async Task<ResponseOperation<Usuario>> Delete(int id)
+        {
+            ResponseOperation<Usuario> responseOperation;
+            try
+            {
+                string sql = "DELETE FROM usuario WHERE id = @Id";
+
+                await _database.ExecuteAsync(sql, new { Id = id });
+
+                responseOperation = new()
+                {
                     IsSuccess = true,
                 };
             }
