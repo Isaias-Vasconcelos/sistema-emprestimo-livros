@@ -13,6 +13,7 @@ namespace GerenciamentoEmprestimoLivros.Infra.Database
         public static void CreateTables()
         {
             Database.Execute(TQ<Usuario>.SqlCreateTable(new Usuario { }));
+            Database.Execute(TQ<Livro>.SqlCreateTable(new Livro { }));
         }
 
         public static void CloseConnection()

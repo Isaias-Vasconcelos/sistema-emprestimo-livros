@@ -7,55 +7,26 @@ using System.Data;
 
 namespace GerenciamentoEmprestimoLivros.Infra.Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class LivroRepository : ILivroRepository
     {
         private readonly IDbConnection _database;
-        public UsuarioRepository()
+        public LivroRepository()
         {
             _database = Connection.Database;
         }
-        public async Task<ResponseOperation<Usuario>> GetAll()
+        public async Task<ResponseOperation<Livro>> GetAll()
         {
-            ResponseOperation<Usuario> responseOperation;
+            ResponseOperation<Livro> responseOperation;
             try
             {
-                string sql = "SELECT * FROM usuario";
-
-                var usuarios = await _database.QueryAsync<Usuario>(sql);
+                string sql = "SELECT * FROM livro";
+                var livros = await _database.QueryAsync<Livro>(sql);
 
                 responseOperation = new()
                 {
                     IsSuccess = true,
-                    ManyResult = usuarios.ToList()
+                    ManyResult = livros.ToList()
                 };
-            }
-            catch (Exception ex)
-            {
-                responseOperation = new()
-                {
-                    IsSuccess = false,
-                    Exception = ex.Message
-                };
-
-            }
-            return responseOperation;
-        }
-
-        public async Task<ResponseOperation<Usuario>> GetById(int id)
-        {
-            ResponseOperation<Usuario> responseOperation;
-            try
-            {
-                string sql = @"SELECT * FROM usuario WHERE id = @Id";
-
-                var usuario = await _database.QueryFirstAsync<Usuario>(sql, new { Id = id });
-
-                responseOperation = new()
-                {
-                    IsSuccess = true,
-                    SingleResult = usuario ?? new Usuario(0, "not found", "not found")
-                };
-
             }
             catch (Exception ex)
             {
@@ -67,21 +38,46 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
             }
             return responseOperation;
         }
-
-        public async Task<ResponseOperation<Usuario>> Save(Usuario usuario)
+        public async Task<ResponseOperation<Livro>> GetById(int id)
         {
-            ResponseOperation<Usuario> responseOperation;
+            ResponseOperation<Livro> responseOperation;
             try
             {
-                string sql = "INSERT INTO usuario (nome,email,senha) VALUES (@Nome,@Email,@Senha)";
+                string sql = "SELECT * FROM livro WHERE id = @Id";
 
-                var parametros = new { usuario.Nome, usuario.Email, usuario.Senha };
+                var livro = await _database.QueryFirstAsync<Livro>(sql, new { Id = id });
+
+                responseOperation = new()
+                {
+                    IsSuccess = true,
+                    SingleResult = livro
+                };
+            }
+            catch (Exception ex)
+            {
+                responseOperation = new()
+                {
+                    IsSuccess = false,
+                    Exception = ex.Message
+                };
+            }
+            return responseOperation;
+        }
+        public async Task<ResponseOperation<Livro>> Create(Livro livro)
+        {
+            ResponseOperation<Livro> responseOperation;
+            try
+            {
+                string sql = @"INSERT INTO livro (urlImage,titulo,descricao,autor,status,dataLancamento)
+                               VALUES (@UrlImage,@Titulo,@Descricao,@Autor,@Status,@DataLancamento)";
+
+                var parametros = new { livro.UrlImage, livro.Titulo, livro.Descricao, livro.Autor, livro.Status, livro.DataLancamento };
 
                 await _database.ExecuteAsync(sql, parametros);
 
                 responseOperation = new()
                 {
-                    IsSuccess = true,
+                    IsSuccess = true
                 };
             }
             catch (Exception ex)
@@ -92,23 +88,26 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
                     Exception = ex.Message
                 };
             }
-            return responseOperation;
-        }
 
-        public async Task<ResponseOperation<Usuario>> Update(Usuario usuario)
+            return responseOperation;
+
+        }
+        public async Task<ResponseOperation<Livro>> Update(Livro livro)
         {
-            ResponseOperation<Usuario> responseOperation;
+            ResponseOperation<Livro> responseOperation;
             try
             {
-                string sql = "UPDATE usuario SET nome = @Nome, email = @Email, senha = @Senha WHERE id = @Id";
+                string sql = @"UPDATE livro SET urlImage = @UrlImage,titulo = @Titulo,descricao = @Descricao
+                              autor = @Autor, status = @Status,dataLancamento = @DataLancamento
+                              WHERE id = @Id";
 
-                var parametros = new { usuario.Id, usuario.Nome, usuario.Email, usuario.Senha };
+                var parametros = new { livro.UrlImage, livro.Titulo, livro.Descricao, livro.Autor, livro.Status, livro.DataLancamento };
 
                 await _database.ExecuteAsync(sql, parametros);
 
                 responseOperation = new()
                 {
-                    IsSuccess = true,
+                    IsSuccess = true
                 };
             }
             catch (Exception ex)
@@ -121,13 +120,12 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
             }
             return responseOperation;
         }
-
-        public async Task<ResponseOperation<Usuario>> Delete(int id)
+        public async Task<ResponseOperation<Livro>> Delete(int id)
         {
-            ResponseOperation<Usuario> responseOperation;
+            ResponseOperation<Livro> responseOperation;
             try
             {
-                string sql = "DELETE FROM usuario WHERE id = @Id";
+                string sql = "DELETE FROM livro WHERE id = @Id";
 
                 await _database.ExecuteAsync(sql, new { Id = id });
 
