@@ -4,11 +4,6 @@ using GerenciamentoEmprestimoLivros.Application.Response;
 using GerenciamentoEmprestimoLivros.Application.ViewModel;
 using GerenciamentoEmprestimoLivros.Core.Entities;
 using GerenciamentoEmprestimoLivros.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
 {

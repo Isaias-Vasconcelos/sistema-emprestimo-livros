@@ -23,6 +23,7 @@ namespace GerenciamentoEmprestimoLivros.Application.Module
         static IServiceCollection Services(this IServiceCollection services)
         {
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<ILivroService, LivroService>();
             return services;
         }
 
@@ -33,6 +34,7 @@ namespace GerenciamentoEmprestimoLivros.Application.Module
 
             // Add Repositories
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ILivroRepository, LivroRepository>();
             return services;
         }
 
