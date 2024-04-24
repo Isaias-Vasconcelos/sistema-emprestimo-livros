@@ -24,6 +24,8 @@ namespace GerenciamentoEmprestimoLivros.Application.Module
         {
             services.AddScoped<IUsuarioService, UsuarioService>();
             services.AddScoped<ILivroService, LivroService>();
+            services.AddScoped<IEmprestimoService, EmprestimoService>();
+
             return services;
         }
 
@@ -35,6 +37,8 @@ namespace GerenciamentoEmprestimoLivros.Application.Module
             // Add Repositories
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ILivroRepository, LivroRepository>();
+            services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
+
             return services;
         }
 

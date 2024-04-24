@@ -16,6 +16,8 @@ namespace GerenciamentoEmprestimoLivros.Application.Profiles
             CreateMap<AdicionarLivroInputModel, Livro>();
             CreateMap<Livro, LivroViewModel>();
             CreateMap<AtualizarLivroInputModel, Livro>();
+
+            CreateMap<AdicionarEmprestimoInputModel, Emprestimo>();
         }
     }
 }

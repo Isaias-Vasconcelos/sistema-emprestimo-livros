@@ -68,6 +68,7 @@ namespace GerenciamentoEmprestimoLivros.Infra.Repositories
             ResponseOperation<Livro> responseOperation;
             try
             {
+                
                 string sql = @"INSERT INTO livro (urlImage,titulo,descricao,autor,status,dataLancamento)
                                VALUES (@UrlImage,@Titulo,@Descricao,@Autor,@Status,@DataLancamento)";
 

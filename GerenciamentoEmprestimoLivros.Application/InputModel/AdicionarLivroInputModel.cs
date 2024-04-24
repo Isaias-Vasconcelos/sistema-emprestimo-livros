@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GerenciamentoEmprestimoLivros.Application.InputModel
 {
     public class AdicionarLivroInputModel
     {
-        [Required,MinLength(10, ErrorMessage = "Url invalida!")]
+        [Required,DataType(DataType.ImageUrl)]
         public string UrlImage { get; set; }
         [Required,MinLength(2)]
         public string Titulo { get;  set; }
