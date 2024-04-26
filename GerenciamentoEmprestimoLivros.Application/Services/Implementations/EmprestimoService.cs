@@ -1,34 +1,115 @@
-﻿using GerenciamentoEmprestimoLivros.Application.InputModel;
+﻿using AutoMapper;
+using GerenciamentoEmprestimoLivros.Application.InputModel;
 using GerenciamentoEmprestimoLivros.Application.Response;
 using GerenciamentoEmprestimoLivros.Application.ViewModel;
+using GerenciamentoEmprestimoLivros.Core.Entities;
+using GerenciamentoEmprestimoLivros.Core.Repositories;
+using GerenciamentoEmprestimoLivros.Infra.Database;
+using System.Data;
+using System.Text.Json;
 
 namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
 {
     public class EmprestimoService : IEmprestimoService
     {
-        public Task<ResponseService<EmprestimoViewModel>> CriarEmprestimo(AdicionarEmprestimoInputModel inputModel)
+        private readonly IEmprestimoRepository _emprestimoRepository;
+        private readonly IMapper _mapper;
+        public EmprestimoService(IEmprestimoRepository emprestimoRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _emprestimoRepository = emprestimoRepository;
+            _mapper = mapper;
+        }
+        public async Task<ResponseService<EmprestimoViewModel>> CriarEmprestimo(AdicionarEmprestimoInputModel inputModel)
+        {
+            var novoEmprestimo = _mapper.Map<Emprestimo>(inputModel);
+
+            var emprestimoCreateResponse = await _emprestimoRepository.Create(novoEmprestimo);
+
+            return emprestimoCreateResponse.IsSuccess ?
+                new ResponseService<EmprestimoViewModel>
+                {
+                    Success = "Emprestimo criado com sucesso!"
+                } : new ResponseService<EmprestimoViewModel>
+                {
+                    Exception = emprestimoCreateResponse.Exception,
+                };
         }
 
-        public Task<ResponseService<EmprestimoViewModel>> ExcluirEmprestimo(int id)
+        public async Task<ResponseService<EmprestimoViewModel>> ExcluirEmprestimo(int id)
         {
-            throw new NotImplementedException();
+            var excluirEmprestimoRepository = await _emprestimoRepository.Delete(id);
+
+            return excluirEmprestimoRepository.IsSuccess ?
+                new ResponseService<EmprestimoViewModel>
+                {
+                    Success = "Emprestimo excluido com sucesso!"
+                } : new ResponseService<EmprestimoViewModel>
+                {
+                    Exception = excluirEmprestimoRepository.Exception,
+                };
         }
 
-        public Task<ResponseService<EmprestimoViewModel>> InformacoesEmprestimo(int id)
+        public async Task<ResponseService<EmprestimoViewModel>> InformacoesEmprestimo(int livroId)
         {
-            throw new NotImplementedException();
+            var emprestimoRepository = await _emprestimoRepository.GetEmprestimo(livroId);
+
+            if (emprestimoRepository.IsSuccess)
+            {
+                var emprestimoViewModel = _mapper.Map<EmprestimoViewModel>(emprestimoRepository.SingleResult);
+
+                return new ResponseService<EmprestimoViewModel>
+                {
+                    Success = "Informações retornadas com sucesso",
+                    SingleResult = emprestimoViewModel
+                };
+            }
+
+            return new ResponseService<EmprestimoViewModel>
+            {
+                Exception = emprestimoRepository.Exception,
+            };
         }
 
-        public Task<ResponseService<EmprestimoViewModel>> ListarEmprestimos()
+        public async Task<ResponseService<EmprestimoViewModel>> ListarEmprestimos()
         {
-            throw new NotImplementedException();
+            var emprestimosRepository = await _emprestimoRepository.GetAll();
+
+            if (emprestimosRepository.IsSuccess)
+            {
+                var emprestimosViewModel = emprestimosRepository.ManyResult.Select(_mapper.Map<EmprestimoViewModel>);
+
+                return new ResponseService<EmprestimoViewModel>
+                {
+                    Success = "Emprestimos listados com sucesso!",
+                    ManyResult = emprestimosViewModel.ToList()
+                };
+            }
+
+            return new ResponseService<EmprestimoViewModel>
+            {
+                Exception = emprestimosRepository.Exception,
+            };
         }
 
-        public Task<ResponseService<EmprestimoViewModel>> ListarEmprestimosPorResponsavel(string responsavel)
+        public async Task<ResponseService<EmprestimoViewModel>> ListarEmprestimosPorResponsavel(string responsavel)
         {
-            throw new NotImplementedException();
+            var emprestimosRepository = await _emprestimoRepository.GetEmprestimosResponsible(responsavel);
+
+            if (emprestimosRepository.IsSuccess)
+            {
+                var emprestimosViewModel = emprestimosRepository.ManyResult.Select(_mapper.Map<EmprestimoViewModel>);
+
+                return new ResponseService<EmprestimoViewModel>
+                {
+                    Success = "Emprestimos listados com sucesso!",
+                    ManyResult = emprestimosViewModel.ToList()
+                };
+            }
+
+            return new ResponseService<EmprestimoViewModel>
+            {
+                Exception = emprestimosRepository.Exception,
+            };
         }
     }
 }

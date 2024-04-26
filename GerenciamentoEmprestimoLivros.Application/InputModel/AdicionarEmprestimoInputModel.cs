@@ -6,7 +6,7 @@ namespace GerenciamentoEmprestimoLivros.Application.InputModel
     {
         [Required]
         public int LivroId { get;set; }
-        [Required]
+        [Required,MinLength(5)]
         public string Responsavel { get;  set; }
         [Required,DataType(DataType.PhoneNumber)]
         public string Telefone { get;  set; }

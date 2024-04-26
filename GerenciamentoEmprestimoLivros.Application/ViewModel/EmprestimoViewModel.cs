@@ -2,6 +2,7 @@
 {
     public class EmprestimoViewModel
     {
+        public int Id { get; set; }
         public int LivroId { get; set; }   
         public string Responsavel { get; set; }
         public string Telefone { get; set; }

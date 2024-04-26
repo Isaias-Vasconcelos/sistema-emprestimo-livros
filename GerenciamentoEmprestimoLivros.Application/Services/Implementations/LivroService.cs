@@ -4,6 +4,7 @@ using GerenciamentoEmprestimoLivros.Application.Response;
 using GerenciamentoEmprestimoLivros.Application.ViewModel;
 using GerenciamentoEmprestimoLivros.Core.Entities;
 using GerenciamentoEmprestimoLivros.Core.Repositories;
+using System.Text.Json;
 
 namespace GerenciamentoEmprestimoLivros.Application.Services.Implementations
 {
